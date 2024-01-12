@@ -11,7 +11,8 @@ public class Main {
         Storage storage = storageJsoner.updateStorage(path);
         MainMenu mainMenu = new MainMenu(storage);
         mainMenu.menu();
-        int a = 2;
+        int b = 2;
+        int c = b;
         storageJsoner.exportStorage(path, storage);
     }
 }
