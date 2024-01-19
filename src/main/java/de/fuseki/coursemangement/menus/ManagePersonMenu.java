@@ -15,21 +15,22 @@ public class ManagePersonMenu extends Menu {
     public ManagePersonMenu(Storage storage,String pathUntilHere, MenuEnum menuEnum) {
         super(storage, pathUntilHere);
         this.MENU_ENUM = menuEnum;
-        thisPathName = getThisPathName();
+        thisPathName = "\\manage_" + getPersontypeInString();
         thisPath = getThisPath();
     }
     private String getThisPath() {
         return pathUntilHere + thisPathName;
     }
 
-    private String getThisPathName() {
-        String pathName;
+    private String getPersontypeInString() {
+        String personType;
         if (MENU_ENUM == MANAGE_STUDENTS){
-            pathName = "\\manage_students";
+            personType = "students";
         }
-        else pathName = "\\manage_lecturer";
-        return  pathName;
+        else personType = "lecturer";
+        return  personType;
     }
+
     public void menu() {
         MenuPersonEnum menuPersonEnum = MENU_PERSON;
         PersonManager personManager = new PersonManager(commandLine, scanner, storage);
@@ -60,7 +61,7 @@ public class ManagePersonMenu extends Menu {
         String options = "Choose one option and the the number.\n" +
                 "1. Create\n" +
                 "2. Delete\n" +
-                "3. Choose one to Adjust values\n" +
+                "3. Update " + getPersontypeInString() +"\n" +
                 "4. Go Back";
         int input = commandLine.readInt(options, 1, 4);
 

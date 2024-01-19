@@ -77,7 +77,7 @@ public class ConfigurePersonMenu extends Menu {
                 "3. Change E-Mail address\n" +
                 "4. Change Address\n" +
                 "5. Change Birthdate\n" +
-                "6. Configure Courses\n" +
+                "6. Update Courses\n" +
                 "7. Back";
         int input = commandLine.readInt(personPossibilities, 1, 7);
 
