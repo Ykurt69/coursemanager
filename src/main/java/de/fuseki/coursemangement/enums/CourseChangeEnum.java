@@ -1,6 +1,6 @@
 package de.fuseki.coursemangement.enums;
 
-public enum CourseChangeEnum implements MenuMarker{
+public enum CourseChangeEnum implements MenuMarker {
     COURSE_CHANGE_ENUM,
     COURSE_CHANGE_LIST_STUDENTS,
     COURSE_CHANGE_TITLE,

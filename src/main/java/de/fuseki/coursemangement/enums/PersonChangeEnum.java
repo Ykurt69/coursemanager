@@ -1,6 +1,6 @@
 package de.fuseki.coursemangement.enums;
 
-public enum PersonChangeEnum implements MenuMarker{
+public enum PersonChangeEnum implements MenuMarker {
     PERSON_CHANGE_ENUM,
     CHANGE_NAME,
     CHANGE_SURNAME,

@@ -7,6 +7,7 @@ import de.fuseki.coursemangement.pojos.Course;
 
 public class ConfigureCoursesMenu extends Menu {
     private final CourseManager COURSEMANAGER;
+
     public ConfigureCoursesMenu(Storage storage, CourseManager courseManager) {
         super(storage);
         this.COURSEMANAGER = courseManager;
@@ -69,7 +70,7 @@ public class ConfigureCoursesMenu extends Menu {
                 "7. List all students of this course\n" +
                 "8. Go Back";
 
-        int input = commandLine.readInt(options, 1,8);
+        int input = commandLine.readInt(options, 1, 8);
 
         CourseChangeEnum courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
         switch (input) {

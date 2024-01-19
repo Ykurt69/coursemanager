@@ -13,16 +13,16 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class CustomCourseDeserializer extends StdDeserializer<Course> {
-    public CustomCourseDeserializer(){
+    public CustomCourseDeserializer() {
         this(null);
     }
 
-    public CustomCourseDeserializer(Class<?> vc){
+    public CustomCourseDeserializer(Class<?> vc) {
         super(vc);
     }
 
     @Override
-    public Course deserialize(JsonParser parser , DeserializationContext deserializer){
+    public Course deserialize(JsonParser parser, DeserializationContext deserializer) {
         ObjectCodec codec = parser.getCodec();
         Course course;
         try {
@@ -39,7 +39,7 @@ public class CustomCourseDeserializer extends StdDeserializer<Course> {
             LocalDate dateBegin = LocalDate.parse(node.get("dateBegin").asText());
             LocalDate dateEnd = LocalDate.parse(node.get("dateEnd").asText());
             // Creating the course
-            course = new Course(id,title,description,lecturerId,address,dateBegin,dateEnd);
+            course = new Course(id, title, description, lecturerId, address, dateBegin, dateEnd);
         } catch (IOException e) {
             System.err.println("Failed to deserialize Course.");
             throw new RuntimeException(e);

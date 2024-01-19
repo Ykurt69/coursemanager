@@ -1,6 +1,6 @@
 package de.fuseki.coursemangement.enums;
 
-public enum MenuPersonEnum implements MenuMarker{
+public enum MenuPersonEnum implements MenuMarker {
     MENU_PERSON,
     CREATE,
     DELETE,

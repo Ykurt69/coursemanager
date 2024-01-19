@@ -1,6 +1,6 @@
 package de.fuseki.coursemangement.enums;
 
-public enum ConfigureCoursesEnum implements MenuMarker{
+public enum ConfigureCoursesEnum implements MenuMarker {
     COURSE_MAIN,
     DELETE_COURSE,
     ADD_COURSE,

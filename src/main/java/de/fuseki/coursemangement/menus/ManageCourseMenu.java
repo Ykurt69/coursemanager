@@ -26,7 +26,7 @@ public class ManageCourseMenu extends Menu {
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
                 case COURSE_CHOOSE:
-                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage,courseManager);
+                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage, courseManager);
                     configureCoursesMenu.menu();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;

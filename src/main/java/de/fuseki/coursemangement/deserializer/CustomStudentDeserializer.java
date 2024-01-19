@@ -14,45 +14,46 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CustomStudentDeserializer extends StdDeserializer<Student> {
-        public CustomStudentDeserializer(){
-            this(null);
-        }
-        public CustomStudentDeserializer(Class<?> vc){
-            super(vc);
-        }
+    public CustomStudentDeserializer() {
+        this(null);
+    }
 
-        public Student deserialize(JsonParser parser , DeserializationContext deserializer){
-            ObjectCodec codec = parser.getCodec();
-            Student student;
-            try {
-                JsonNode node = codec.readTree(parser);
-                String name = node.get("name").asText();
-                String surname = node.get("surname").asText();
-                String emailAddress = node.get("emailAddress").asText();
-                JsonNode addressAsNode = node.get("address");
-                int matriculationNumber = node.get("matriculationNumber").asInt();
+    public CustomStudentDeserializer(Class<?> vc) {
+        super(vc);
+    }
 
-                // Create Address
-                ObjectMapper objectMapper = new ObjectMapper();
-                Address address = objectMapper.treeToValue(addressAsNode, Address.class);
+    public Student deserialize(JsonParser parser, DeserializationContext deserializer) {
+        ObjectCodec codec = parser.getCodec();
+        Student student;
+        try {
+            JsonNode node = codec.readTree(parser);
+            String name = node.get("name").asText();
+            String surname = node.get("surname").asText();
+            String emailAddress = node.get("emailAddress").asText();
+            JsonNode addressAsNode = node.get("address");
+            int matriculationNumber = node.get("matriculationNumber").asInt();
 
-                // Create Date
-                LocalDate birthdate = LocalDate.parse(node.get("birthdate").asText());
+            // Create Address
+            ObjectMapper objectMapper = new ObjectMapper();
+            Address address = objectMapper.treeToValue(addressAsNode, Address.class);
 
-                // get the List of courseIds
-                JsonNode listNode = node.get("courseIds");
-                ArrayList<Integer> courseIds = new ArrayList<>();
-                for (JsonNode integerNode : listNode){
-                    courseIds.add(integerNode.get("id").asInt());
-                }
+            // Create Date
+            LocalDate birthdate = LocalDate.parse(node.get("birthdate").asText());
 
-                student = new Student(name,surname,emailAddress,address,birthdate,matriculationNumber);
-                student.setCourseIds(courseIds);
-
-            } catch (IOException e) {
-                System.err.println("Failed to Deserialize Student.");
-                throw new RuntimeException(e);
+            // get the List of courseIds
+            JsonNode listNode = node.get("courseIds");
+            ArrayList<Integer> courseIds = new ArrayList<>();
+            for (JsonNode integerNode : listNode) {
+                courseIds.add(integerNode.get("id").asInt());
             }
-            return student;
+
+            student = new Student(name, surname, emailAddress, address, birthdate, matriculationNumber);
+            student.setCourseIds(courseIds);
+
+        } catch (IOException e) {
+            System.err.println("Failed to Deserialize Student.");
+            throw new RuntimeException(e);
         }
+        return student;
+    }
 }

@@ -9,6 +9,7 @@ import de.fuseki.coursemangement.pojos.Person;
 public class ConfigurePersonMenu extends Menu {
     private final MenuEnum MENU_ENUM;
     private final PersonManager PERSON_MANAGER;
+
     public ConfigurePersonMenu(Storage storage, MenuEnum menuEnum, PersonManager personManager) {
         super(storage);
         this.MENU_ENUM = menuEnum;
@@ -46,7 +47,7 @@ public class ConfigurePersonMenu extends Menu {
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CONFIGURE_COURSES:
-                    ConfigureCoursesOfPersonMenu configureCoursesOfPersonMenu = new ConfigureCoursesOfPersonMenu(storage,person);
+                    ConfigureCoursesOfPersonMenu configureCoursesOfPersonMenu = new ConfigureCoursesOfPersonMenu(storage, person);
                     configureCoursesOfPersonMenu.menu();
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;

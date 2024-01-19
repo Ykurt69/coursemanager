@@ -54,6 +54,7 @@ public class StorageJsoner {
 
     /**
      * Instances a ObjectMapper and adds the Deserializer to it.
+     *
      * @return the configured Mapper.
      */
     private ObjectMapper getImportMapper() {

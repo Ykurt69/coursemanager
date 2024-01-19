@@ -13,19 +13,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CustomLecturerDeserializer extends StdDeserializer<Lecturer> {
-    public CustomLecturerDeserializer(){
+    public CustomLecturerDeserializer() {
         this(null);
     }
-    public CustomLecturerDeserializer(Class<?> vc){
+
+    public CustomLecturerDeserializer(Class<?> vc) {
         super(vc);
     }
 
 
     @Override
-    public Lecturer deserialize(JsonParser parser , DeserializationContext deserializer){
+    public Lecturer deserialize(JsonParser parser, DeserializationContext deserializer) {
         ObjectCodec codec = parser.getCodec();
         Lecturer lecturer;
-        try{
+        try {
             JsonNode node = codec.readTree(parser);
             String name = node.get("name").asText();
             String surname = node.get("surname").asText();
@@ -42,12 +43,12 @@ public class CustomLecturerDeserializer extends StdDeserializer<Lecturer> {
             // get the List of courseIds
             JsonNode listNode = node.get("courseIds");
             ArrayList<Integer> courseIds = new ArrayList<>();
-            for (JsonNode integerNode : listNode){
+            for (JsonNode integerNode : listNode) {
                 courseIds.add(integerNode.get("id").asInt());
             }
-            lecturer = new Lecturer(name,surname,emailAddress,address,birthdate,employeeId);
+            lecturer = new Lecturer(name, surname, emailAddress, address, birthdate, employeeId);
             lecturer.setCourseIds(courseIds);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println("Failed to deserialize Lecturer");
             throw new RuntimeException();
         }

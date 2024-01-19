@@ -10,6 +10,8 @@ public abstract class Menu {
     CommandLine commandLine;
     protected Storage storage;
     protected Scanner scanner;
+
+
     public Menu(Storage storage) {
         this.scanner = new Scanner(System.in);
         this.commandLine = new CommandLine(scanner);
@@ -23,6 +25,7 @@ public abstract class Menu {
 
     /**
      * Asks what the user wants to do and returns it in Enum.
+     *
      * @return the selected enum.
      */
     protected abstract MenuMarker selectedOption();
