@@ -7,22 +7,26 @@ import de.fuseki.coursemangement.pojos.Course;
 
 public class ConfigureCoursesMenu extends Menu {
     private final CourseManager COURSEMANAGER;
+    private final String thisPathName = "\\update_course";
+    private final String thisPath = pathUntilHere + thisPathName;
 
-    public ConfigureCoursesMenu(Storage storage, CourseManager courseManager) {
-        super(storage);
+    public ConfigureCoursesMenu(Storage storage, String pathUntilHere, CourseManager courseManager) {
+        super(storage, pathUntilHere);
         this.COURSEMANAGER = courseManager;
     }
 
     public void menu() {
         {
+            // Get course and the path.
+            System.out.println(thisPath);
             CourseChangeEnum courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
             Course choosenCourse = storage.searchCourse(COURSEMANAGER.choseCourseIdFromIntegerList(storage.convertCoursesToIds(storage.getAllCourses())));
-            if (choosenCourse == null) {
-                courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM_EXIT;
-            }
+
+
             while (courseChangeEnum != CourseChangeEnum.COURSE_CHANGE_ENUM_EXIT) {
                 switch (courseChangeEnum) {
                     case COURSE_CHANGE_ENUM:
+                        System.out.println(thisPath + "\\" + choosenCourse.getTitle());
                         courseChangeEnum = this.selectedOption();
                         break;
                     case COURSE_CHANGE_LIST_STUDENTS:
@@ -30,26 +34,32 @@ public class ConfigureCoursesMenu extends Menu {
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_TITLE:
+                        System.out.println(thisPath + "\\change_title");
                         choosenCourse.setTitle(commandLine.readString("Type the new title: ", scanner, "Old title: " + choosenCourse.getTitle()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DESCRIPTION:
+                        System.out.println(thisPath + "\\change_description");
                         choosenCourse.setDescription(commandLine.readString("Type the new description: ", scanner, "Old description: " + choosenCourse.getDescription()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_LECTURERID:
+                        System.out.println(thisPath + "\\change_lecturerid");
                         choosenCourse.setLecturerId(commandLine.readInt("Type new id: ", scanner, "Old id: " + choosenCourse.getLecturerId()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_ADDRESS:
+                        System.out.println(thisPath + "\\change_address");
                         choosenCourse.setAddress(commandLine.readAddress(scanner, "Old Address: " + choosenCourse.getAddress()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DATEBEGIN:
+                        System.out.println(thisPath + "\\change_date_begin");
                         choosenCourse.setDateBegin(commandLine.readDate("Type new begin date: ", scanner, "Old begin date: " + choosenCourse.getDateBegin()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DATEEND:
+                        System.out.println(thisPath + "\\change_date_end");
                         choosenCourse.setDateEnd(commandLine.readDate("Type new end date: ", scanner, "Old end date: " + choosenCourse.getDateEnd()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;

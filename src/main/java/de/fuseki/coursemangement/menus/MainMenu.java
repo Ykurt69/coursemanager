@@ -4,8 +4,11 @@ import de.fuseki.coursemangement.enums.MenuEnum;
 import de.fuseki.coursemangement.exchange.Storage;
 
 public class MainMenu extends Menu {
-    public MainMenu(Storage storage) {
-        super(storage);
+    private final String thisPathName = "\\main";
+    private final String thisPath = pathUntilHere + thisPathName;
+    public MainMenu(Storage storage, String pathUntilHere) {
+        super(storage, pathUntilHere);
+
     }
 
     public void menu() {
@@ -13,16 +16,17 @@ public class MainMenu extends Menu {
         while (menuEnum != MenuEnum.EXIT_MAIN_MENU) {
             switch (menuEnum) {
                 case MAIN_MENU:
+                    System.out.println(thisPath);
                     menuEnum = this.selectedOption();
                     break;
                 case MANAGE_STUDENTS:
                 case MANAGE_LECTURERS:
-                    ManagePersonMenu managePersonMenu = new ManagePersonMenu(storage, menuEnum);
+                    ManagePersonMenu managePersonMenu = new ManagePersonMenu(storage,thisPath, menuEnum);
                     managePersonMenu.menu();
                     menuEnum = MenuEnum.MAIN_MENU;
                     break;
                 case MANAGE_COURSES:
-                    ManageCourseMenu manageCourseMenu = new ManageCourseMenu(storage);
+                    ManageCourseMenu manageCourseMenu = new ManageCourseMenu(storage,thisPath);
                     manageCourseMenu.menu();
                     menuEnum = MenuEnum.MAIN_MENU;
                     break;
@@ -31,6 +35,7 @@ public class MainMenu extends Menu {
     }
 
     protected MenuEnum selectedOption() {
+        String thisPath = pathUntilHere + "\\main";
         String options = "Main Menu\n" +
                 "Type the Number of the following tools.\n" +
                 "1. Manage Students\n" +

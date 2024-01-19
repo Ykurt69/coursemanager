@@ -6,48 +6,62 @@ import de.fuseki.coursemangement.exchange.Storage;
 import de.fuseki.coursemangement.management.PersonManager;
 import de.fuseki.coursemangement.pojos.Person;
 
+import static de.fuseki.coursemangement.enums.MenuEnum.*;
+
 public class ConfigurePersonMenu extends Menu {
     private final MenuEnum MENU_ENUM;
     private final PersonManager PERSON_MANAGER;
+    private final String thisPathName = "\\update";
+    private final String thisPath = pathUntilHere + thisPathName;
 
-    public ConfigurePersonMenu(Storage storage, MenuEnum menuEnum, PersonManager personManager) {
-        super(storage);
+    public ConfigurePersonMenu(Storage storage, String pathUntilHere, MenuEnum menuEnum, PersonManager personManager) {
+        super(storage, pathUntilHere);
         this.MENU_ENUM = menuEnum;
         this.PERSON_MANAGER = personManager;
+
     }
 
     public void menu() {
-
+        // Get Person and path of person
+        System.out.println(thisPath);
         Person person = PERSON_MANAGER.choosePersonAsPerson(MENU_ENUM);
-        PersonChangeEnum personChangeEnum = person == null ? PersonChangeEnum.PERSON_CHANGE_ENUM_EXIT : PersonChangeEnum.PERSON_CHANGE_ENUM;
+        String pathOfPerson = thisPath + "\\" + person.getName();
+
+        PersonChangeEnum personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
         while (personChangeEnum != PersonChangeEnum.PERSON_CHANGE_ENUM_EXIT) {
             switch (personChangeEnum) {
                 case PERSON_CHANGE_ENUM:
+                    System.out.println(pathOfPerson);
                     personChangeEnum = selectedOption();
 
                     break;
                 case CHANGE_NAME:
+                    System.out.println(pathOfPerson + "\\change_name");
                     commandLine.readString("Type new name: ", scanner, "Old name: " + person.getName());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_SURNAME:
+                    System.out.println(pathOfPerson + "\\change_surname");
                     commandLine.readString("Type new surname: ", scanner, "Old surname: " + person.getSurname());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_EMAIL:
+                    System.out.println(pathOfPerson + "\\change_email");
                     commandLine.readString("Type new Email: ", scanner, "Old Email: " + person.getEmailAddress());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_ADDRESS:
+                    System.out.println(pathOfPerson + "\\change_address");
                     commandLine.readAddress(scanner, "Old address: " + person.getAddress().toString());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_BIRTHDATE:
+                    System.out.println(pathOfPerson + "\\change_birthdate");
                     commandLine.readDate("Type new Date: ", scanner, "Old Date: " + person.getBirthdate().toString());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CONFIGURE_COURSES:
-                    ConfigureCoursesOfPersonMenu configureCoursesOfPersonMenu = new ConfigureCoursesOfPersonMenu(storage, person);
+                    ConfigureCoursesOfPersonMenu configureCoursesOfPersonMenu = new ConfigureCoursesOfPersonMenu(storage, pathOfPerson, person);
                     configureCoursesOfPersonMenu.menu();
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;

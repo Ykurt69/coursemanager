@@ -10,12 +10,13 @@ public abstract class Menu {
     CommandLine commandLine;
     protected Storage storage;
     protected Scanner scanner;
+    protected String pathUntilHere;
 
-
-    public Menu(Storage storage) {
+    public Menu(Storage storage, String pathUntilHere) {
         this.scanner = new Scanner(System.in);
         this.commandLine = new CommandLine(scanner);
         this.storage = storage;
+        this.pathUntilHere = pathUntilHere;
     }
 
     /**

@@ -5,8 +5,10 @@ import de.fuseki.coursemangement.exchange.Storage;
 import de.fuseki.coursemangement.management.CourseManager;
 
 public class ManageCourseMenu extends Menu {
-    public ManageCourseMenu(Storage storage) {
-        super(storage);
+    private final String thisPathName = "\\manage_courses";
+    private final String thisPath = pathUntilHere + thisPathName;
+    public ManageCourseMenu(Storage storage, String pathUntilHere) {
+        super(storage,pathUntilHere);
     }
 
     public void menu() {
@@ -15,18 +17,21 @@ public class ManageCourseMenu extends Menu {
         while (menuCourseEnum != MenuCourseEnum.EXIT_MENU_COURSE_ENUM) {
             switch (menuCourseEnum) {
                 case MENU_COURSE_ENUM:
+                    System.out.println(thisPath);
                     menuCourseEnum = selectedOption();
                     break;
                 case COURSE_CREATE:
+                    System.out.println(thisPath + "\\create_course");
                     courseManager.createCourse();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
                 case COURSE_DELETE:
+                    System.out.println(thisPath + "\\delete_course");
                     courseManager.removeChosenCourseWithIntegerList(storage.convertCoursesToIds(storage.getAllCourses()));
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
                 case COURSE_CHOOSE:
-                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage, courseManager);
+                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage,thisPath , courseManager);
                     configureCoursesMenu.menu();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;

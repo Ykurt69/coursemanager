@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         StorageJsoner storageJsoner = new StorageJsoner();
         Storage storage = storageJsoner.updateStorage(path);
-        MainMenu mainMenu = new MainMenu(storage);
+        MainMenu mainMenu = new MainMenu(storage, "");
         mainMenu.menu();
         storageJsoner.exportStorage(path, storage);
     }

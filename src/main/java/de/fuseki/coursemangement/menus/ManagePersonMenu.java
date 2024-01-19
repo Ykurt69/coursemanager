@@ -5,34 +5,50 @@ import de.fuseki.coursemangement.enums.MenuPersonEnum;
 import de.fuseki.coursemangement.exchange.Storage;
 import de.fuseki.coursemangement.management.PersonManager;
 
+import static de.fuseki.coursemangement.enums.MenuEnum.MANAGE_STUDENTS;
 import static de.fuseki.coursemangement.enums.MenuPersonEnum.*;
 
 public class ManagePersonMenu extends Menu {
-    private final MenuEnum MENUENUM;
-
-    public ManagePersonMenu(Storage storage, MenuEnum menuEnum) {
-        super(storage);
-        this.MENUENUM = menuEnum;
+    private final MenuEnum MENU_ENUM;
+    private final String thisPathName;
+    private final String thisPath;
+    public ManagePersonMenu(Storage storage,String pathUntilHere, MenuEnum menuEnum) {
+        super(storage, pathUntilHere);
+        this.MENU_ENUM = menuEnum;
+        thisPathName = getThisPathName();
+        thisPath = getThisPath();
+    }
+    private String getThisPath() {
+        return pathUntilHere + thisPathName;
     }
 
+    private String getThisPathName() {
+        String pathName;
+        if (MENU_ENUM == MANAGE_STUDENTS){
+            pathName = "\\manage_students";
+        }
+        else pathName = "\\manage_lecturer";
+        return  pathName;
+    }
     public void menu() {
         MenuPersonEnum menuPersonEnum = MENU_PERSON;
         PersonManager personManager = new PersonManager(commandLine, scanner, storage);
         while (menuPersonEnum != EXIT_MENU_PERSON) {
             switch (menuPersonEnum) {
                 case MENU_PERSON:
+                    System.out.println(thisPath);
                     menuPersonEnum = this.selectedOption();
                     break;
                 case CREATE:
-                    personManager.createPerson(MENUENUM);
+                    personManager.createPerson(MENU_ENUM);
                     menuPersonEnum = MENU_PERSON;
                     break;
                 case DELETE:
-                    personManager.removePerson(MENUENUM);
+                    personManager.removePerson(MENU_ENUM);
                     menuPersonEnum = MENU_PERSON;
                     break;
                 case CHOOSE:
-                    ConfigurePersonMenu configurePersonMenu = new ConfigurePersonMenu(storage, MENUENUM, personManager);
+                    ConfigurePersonMenu configurePersonMenu = new ConfigurePersonMenu(storage,thisPath, MENU_ENUM, personManager);
                     configurePersonMenu.menu();
                     menuPersonEnum = MENU_PERSON;
                     break;
