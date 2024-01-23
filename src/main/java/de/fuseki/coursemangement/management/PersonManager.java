@@ -89,7 +89,7 @@ public class PersonManager extends Manager {
         } else return false;
     }
 
-    private List<Student> filterStudentList(String filter) { 
+    private List<Student> filterStudentList(String filter) {
         List<Student> unfilteredStudentList = storage.getStudents();
         List<Student> filteredStudentList = new ArrayList<>();
         for (Student student : unfilteredStudentList) {
