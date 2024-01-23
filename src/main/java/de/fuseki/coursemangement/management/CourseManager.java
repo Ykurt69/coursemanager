@@ -31,19 +31,6 @@ public class CourseManager extends Manager {
     }
 
     /**
-     * Lists the Courses from the integerList and adds the chosen one into the Storage.
-     *
-     * @param person      person which the course should be added.
-     * @param integerList of Course, Ids.
-     */
-    public void addChosenCourse(Person person, List<Integer> integerList) {
-        int courseId = chooseCourseIdByFilteredList();
-        if (courseId != -1) {
-            person.addCourse(courseId);
-        }
-    }
-
-    /**
      * lists all students of the course.
      *
      * @param course which do have the students.
