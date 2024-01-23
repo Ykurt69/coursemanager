@@ -6,8 +6,6 @@ import de.fuseki.coursemangement.exchange.Storage;
 import de.fuseki.coursemangement.management.PersonManager;
 import de.fuseki.coursemangement.pojos.Person;
 
-import static de.fuseki.coursemangement.enums.MenuEnum.*;
-
 public class ConfigurePersonMenu extends Menu {
     private final MenuEnum MENU_ENUM;
     private final PersonManager PERSON_MANAGER;
@@ -25,15 +23,18 @@ public class ConfigurePersonMenu extends Menu {
         // Get Person and path of person
         System.out.println(thisPath);
         Person person = PERSON_MANAGER.choosePersonAsPerson(MENU_ENUM);
-        String pathOfPerson = thisPath + "\\" + person.getName();
-
+        String pathOfPerson = "";
         PersonChangeEnum personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
+        if (person != null){
+        pathOfPerson = thisPath + "\\" + person.getName();
+        } else{
+            personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM_EXIT;
+        }
         while (personChangeEnum != PersonChangeEnum.PERSON_CHANGE_ENUM_EXIT) {
             switch (personChangeEnum) {
                 case PERSON_CHANGE_ENUM:
                     System.out.println(pathOfPerson);
                     personChangeEnum = selectedOption();
-
                     break;
                 case CHANGE_NAME:
                     System.out.println(pathOfPerson + "\\change_name");

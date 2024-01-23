@@ -50,20 +50,18 @@ public class PersonManager extends Manager {
      *
      * @param personTypeOfMenu decides if it is a student or a Person;
      */
-    public int listPersons(MenuEnum personTypeOfMenu) {
+    public void listPersons(MenuEnum personTypeOfMenu) {
         if (personTypeOfMenu == MANAGE_STUDENTS) {
             List<Student> studentList = storage.getStudents();
             for (int i = 0; i < studentList.size(); i++) {
                 System.out.println(i + 1 + ". " + studentList.get(i));
             }
-            return studentList.size();
         } else if (personTypeOfMenu == MANAGE_LECTURERS) {
             List<Lecturer> lecturerList = storage.getLecturers();
             for (int i = 0; i < lecturerList.size(); i++) {
                 System.out.println(i + 1 + ". " + lecturerList.get(i));
             }
-            return lecturerList.size();
-        } else return -1;
+        }
     }
 
     /**
@@ -126,17 +124,21 @@ public class PersonManager extends Manager {
         while (!personExists) {
             if (anyPerson) {
                 if (personTypeOfMenu == MANAGE_STUDENTS) {
-                    input = commandLine.readInt("Type in the Matriculation number of the Student.");
+                    input = commandLine.readInt("Type in the Matriculation number of the Student.", "Abort");
                 } else {
-                    input = commandLine.readInt("Type in the ID of the Lecturer.");
+                    input = commandLine.readInt("Type in the ID of the Lecturer.", "Abort");
                 }
             } else {
                 System.out.println("there are no Persons");
                 return -1;
             }
-            personExists = checkPersonExists(personTypeOfMenu, input);
-            if (!personExists) {
-                System.err.println("Not existing please retry!");
+            if (input != -1) {
+                personExists = checkPersonExists(personTypeOfMenu, input);
+                if (!personExists) {
+                    System.err.println("Not existing please retry!");
+                }
+            } else {
+                personExists = true;
             }
         }
         return input;
@@ -176,9 +178,6 @@ public class PersonManager extends Manager {
             } else if (personTypeOfMenu == MANAGE_LECTURERS) {
                 choosenPerson = storage.searchLecturer(ID);
             }
-        } else {
-            System.err.println("Not found.");
-            return null;
         }
         return choosenPerson;
     }
@@ -190,10 +189,12 @@ public class PersonManager extends Manager {
      */
     public void removePerson(MenuEnum menuEnum) {
         int id = choosePersonIdWithFilter(menuEnum);
-        if (menuEnum == MANAGE_STUDENTS) {
-            storage.remove(storage.searchStudentByMatNumber(id));
-        } else if (menuEnum == MANAGE_LECTURERS) {
-            storage.remove(storage.getLecturerByIndex(id));
+        if (id != -1) {
+            if (menuEnum == MANAGE_STUDENTS) {
+                storage.remove(storage.searchStudentByMatNumber(id));
+            } else if (menuEnum == MANAGE_LECTURERS) {
+                storage.remove(storage.getLecturerByIndex(id));
+            }
         }
     }
 }

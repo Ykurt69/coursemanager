@@ -7,8 +7,9 @@ import de.fuseki.coursemangement.management.CourseManager;
 public class ManageCourseMenu extends Menu {
     private final String thisPathName = "\\manage_courses";
     private final String thisPath = pathUntilHere + thisPathName;
+
     public ManageCourseMenu(Storage storage, String pathUntilHere) {
-        super(storage,pathUntilHere);
+        super(storage, pathUntilHere);
     }
 
     public void menu() {
@@ -35,13 +36,12 @@ public class ManageCourseMenu extends Menu {
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
                 case COURSE_CHOOSE:
-                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage,thisPath , courseManager);
+                    ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage, thisPath, courseManager);
                     configureCoursesMenu.menu();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
             }
         }
-
     }
 
 

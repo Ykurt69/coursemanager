@@ -31,10 +31,31 @@ public class CommandLine {
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             }
-        } while (!input.matches("\\d+"));
+        } while (!input.matches("\\d+" ));
         return Integer.parseInt(input);
     }
 
+    /**
+     * Prints a description of the inout and returns it. If the Abort string is given, it will return -1.
+     *
+     * @param message the descriptions of the input.
+     * @return the id in int.
+     */
+    public int readInt(String message, String abortInput) {
+        String input;
+        do {
+            System.out.println(message + "\nto abort and go back type " + abortInput);
+
+            input = scanner.next();
+            if (input.equalsIgnoreCase(abortInput)){
+                input = "-1";
+            }
+            if (!input.matches("\\d+") && !input.equals("-1")) {
+                System.err.println("Error: pls just use digits!");
+            }
+        } while (!input.matches("\\d+") && !input.equals("-1"));
+        return Integer.parseInt(input);
+    }
     /**
      * Prints a description of the inout and returns it.
      * If min and max are set, it will ask till the user enters a number between and inclusive min and max.
