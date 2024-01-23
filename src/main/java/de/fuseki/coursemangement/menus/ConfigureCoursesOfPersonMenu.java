@@ -30,7 +30,7 @@ public class ConfigureCoursesOfPersonMenu extends Menu {
                     break;
                 case DELETE_COURSE:
                     System.out.println(pathUntilHere + "\\delete_course");
-                    COURSE_MANAGER.removeChosenCourseWithIntegerList(PERSON, PERSON.getCourses());
+                  //  COURSE_MANAGER.removeChosenCourseWithIntegerList(PERSON, PERSON.getCourses());
                     configureCoursesEnum = ConfigureCoursesEnum.COURSE_MAIN;
                     break;
             }

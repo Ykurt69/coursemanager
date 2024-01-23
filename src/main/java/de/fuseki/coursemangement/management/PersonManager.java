@@ -27,9 +27,9 @@ public class PersonManager extends Manager {
      */
     public void createPerson(MenuEnum personTypeOfMenu) {
         // Collect all Parameters
-        String name = commandLine.readString("name: ", scanner);
-        String surname = commandLine.readString("surname: ", scanner);
-        String emailAddress = commandLine.readString("email: ", scanner);
+        String name = commandLine.readString("name: ");
+        String surname = commandLine.readString("surname: ");
+        String emailAddress = commandLine.readString("email: ");
         Address address = commandLine.readAddress(scanner);
         LocalDate birthdate = commandLine.readDate("Birthdate", scanner);
 
@@ -111,24 +111,6 @@ public class PersonManager extends Manager {
         return filteredLecturerList;
     }
 
-    /**
-     * Lists the needed Person List and returns the index of the chosen Person.
-     *
-     * @param personTypeOfMenu the enum to separate Lecturers from Students.
-     * @return the index of the Person.
-     */
-    public int choosePerson(MenuEnum personTypeOfMenu) {
-        int sizeOfList = this.listPersons(personTypeOfMenu);
-        int input;
-
-        if (sizeOfList < 1) {
-            System.out.println("there are no Persons");
-            return -1;
-        } else {
-            input = commandLine.readInt("Which Person do you want to choose?", 1, sizeOfList);
-        }
-        return input - 1;
-    }
 
     /**
      * Lists the needed Person List and returns the index of the chosen Person.
@@ -136,8 +118,8 @@ public class PersonManager extends Manager {
      * @param personTypeOfMenu the enum to separate Lecturers from Students.
      * @return the index of the Person.
      */
-    public int choosePersonWithFilter(MenuEnum personTypeOfMenu) {
-        String filter = commandLine.readString("Type in the filter. (All matches with the filter will be shown.)", scanner);
+    public int choosePersonIdWithFilter(MenuEnum personTypeOfMenu) {
+        String filter = commandLine.readString("Type in the filter. (All matches with the filter will be shown.)");
         boolean anyPerson = this.listPersons(personTypeOfMenu, filter);
         int input = 0;
         boolean personExists = false;
@@ -153,7 +135,7 @@ public class PersonManager extends Manager {
                 return -1;
             }
             personExists = checkPersonExists(personTypeOfMenu, input);
-            if (!personExists){
+            if (!personExists) {
                 System.err.println("Not existing please retry!");
             }
         }
@@ -162,8 +144,9 @@ public class PersonManager extends Manager {
 
     /**
      * Checks if the input matches id or a matriculation number.
+     *
      * @param personTypeOfMenu needed to know if it is a matriculation number or an id.
-     * @param input the id or matriculation number which has to be checked.
+     * @param input            the id or matriculation number which has to be checked.
      * @return if the id or matriculation number exists.
      */
     private boolean checkPersonExists(MenuEnum personTypeOfMenu, int input) {
@@ -185,7 +168,7 @@ public class PersonManager extends Manager {
      * @return the Person which has been chosen.
      */
     public Person choosePersonAsPerson(MenuEnum personTypeOfMenu) {
-        int ID = choosePersonWithFilter(personTypeOfMenu);
+        int ID = choosePersonIdWithFilter(personTypeOfMenu);
         Person choosenPerson = null;
         if (ID != -1) {
             if (personTypeOfMenu == MANAGE_STUDENTS) {
@@ -206,12 +189,11 @@ public class PersonManager extends Manager {
      * @param menuEnum to find if it is a Student or Lecturer.
      */
     public void removePerson(MenuEnum menuEnum) {
-        int indexOfPerson = choosePerson(menuEnum);
+        int id = choosePersonIdWithFilter(menuEnum);
         if (menuEnum == MANAGE_STUDENTS) {
-            storage.remove(storage.getStudentByIndex(indexOfPerson));
+            storage.remove(storage.searchStudentByMatNumber(id));
         } else if (menuEnum == MANAGE_LECTURERS) {
-            storage.remove(storage.getLecturerByIndex(indexOfPerson));
+            storage.remove(storage.getLecturerByIndex(id));
         }
-
     }
 }

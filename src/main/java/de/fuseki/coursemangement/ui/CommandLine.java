@@ -163,10 +163,10 @@ public class CommandLine {
      * @return the Address in Address.
      */
     public Address readAddress(Scanner scanner) {
-        String street = readString("Street: ", scanner);
-        String houseNumber = readString("House Number: ", scanner);
-        String city = readString("City: ", scanner);
-        String postalCode = readString("postal code: ", scanner);
+        String street = readString("Street: ");
+        String houseNumber = readString("House Number: ");
+        String city = readString("City: ");
+        String postalCode = readString("postal code: ");
         return new Address(street, houseNumber, city, postalCode);
     }
 
@@ -178,10 +178,10 @@ public class CommandLine {
      */
     public Address readAddress(Scanner scanner, String oldAddress) {
         System.out.println(oldAddress);
-        String street = readString("Street: ", scanner);
-        String houseNumber = readString("House Number: ", scanner);
-        String city = readString("City: ", scanner);
-        String postalCode = readString("postal code: ", scanner);
+        String street = readString("Street: ");
+        String houseNumber = readString("House Number: ");
+        String city = readString("City: ");
+        String postalCode = readString("postal code: ");
         return new Address(street, houseNumber, city, postalCode);
     }
 
@@ -190,10 +190,9 @@ public class CommandLine {
      * Asks in the console for an input and returns it without formatting or parsing it.
      *
      * @param description of the input wanted.
-     * @param scanner     to read out of console.
      * @return the input in String.
      */
-    public String readString(String description, Scanner scanner) {
+    public String readString(String description) {
         System.out.println(description);
         return scanner.next();
     }

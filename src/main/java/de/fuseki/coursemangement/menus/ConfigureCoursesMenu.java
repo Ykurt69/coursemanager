@@ -20,8 +20,10 @@ public class ConfigureCoursesMenu extends Menu {
             // Get course and the path.
             System.out.println(thisPath);
             CourseChangeEnum courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
-            Course choosenCourse = storage.searchCourse(COURSEMANAGER.choseCourseIdFromIntegerList(storage.convertCoursesToIds(storage.getAllCourses())));
-
+            Course choosenCourse = COURSEMANAGER.chooseCourseByFilteredList();
+            if (choosenCourse == null) {
+                courseChangeEnum = courseChangeEnum.COURSE_CHANGE_ENUM_EXIT;
+            }
 
             while (courseChangeEnum != CourseChangeEnum.COURSE_CHANGE_ENUM_EXIT) {
                 switch (courseChangeEnum) {

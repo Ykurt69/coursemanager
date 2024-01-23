@@ -20,8 +20,8 @@ public class CourseManager extends Manager {
      */
     public void createCourse() {
         int id = commandLine.readInt("ID: ");
-        String title = commandLine.readString("title: ", scanner);
-        String description = commandLine.readString("description: ", scanner);
+        String title = commandLine.readString("title: ");
+        String description = commandLine.readString("description: ");
         Lecturer lecturer = commandLine.findLecturer(scanner, storage);
         Address address = commandLine.readAddress(scanner);
         LocalDate dateBegin = commandLine.readDate("Begin date", scanner);
@@ -37,7 +37,7 @@ public class CourseManager extends Manager {
      * @param integerList of Course, Ids.
      */
     public void addChosenCourse(Person person, List<Integer> integerList) {
-        int courseId = choseCourseIdFromIntegerList(integerList);
+        int courseId = chooseCourseIdByFilteredList();
         if (courseId != -1) {
             person.addCourse(courseId);
         }
@@ -80,59 +80,69 @@ public class CourseManager extends Manager {
      * Lists all courses of the person into the console with the number they have.
      * The List which has been printed.
      */
-    public void listCoursesFromIds(List<Integer> integerList) {
-        List<Course> courseList = storage.convertIdsToCourses(integerList);
-        if (!courseList.isEmpty()) {
-            for (int i = 0; i < courseList.size(); i++) {
-                System.out.println((i + 1) + ". " + courseList.get(i).toString());
+    public void listCourses(List<Course> courses) {
+        if (!courses.isEmpty()) {
+            for (int i = 0; i < courses.size(); i++) {
+                System.out.println((i + 1) + ". " + courses.get(i).toString());
             }
         }
     }
 
-    /**
-     * Lists all courses and waits for the user to choose one.
-     *
-     * @return the id of the course. -1 if there is no Person.
-     */
-    public int choseCourseIdFromIntegerList(List<Integer> integerList) {
-        List<Course> courseList = storage.convertIdsToCourses(integerList);
-        listCoursesFromIds(integerList);
-        int input;
-        int idOfTheCourse = -1;
-        if (courseList != null && !courseList.isEmpty()) {
-            input = commandLine.readInt("Choose one Course.", 1, courseList.size());
-            idOfTheCourse = courseList.get(input - 1).getId();
-        } else System.out.println("No Courses available");
-        return idOfTheCourse;
+
+
+
+
+
+    public Course chooseCourseByFilteredList() {
+        int courseId = chooseCourseIdByFilteredList();
+        Course choosenCourse = null;
+        if (courseId != -1){
+            choosenCourse = storage.searchCourse(courseId);
+        }
+        return choosenCourse;
     }
 
-    /**
-     * lists all courses and deletes the chosen one.
-     *
-     * @param person      the person which has the courses.
-     * @param integerList List of the containing Courses.
-     */
-    public void removeChosenCourseWithIntegerList(Person person, List<Integer> integerList) {
-        int courseId = choseCourseIdFromIntegerList(integerList);
-        if (courseId == -1) {
-            System.out.println("There are no courses!");
-        } else {
-            person.removeCourse(storage.searchCourse(courseId));
+    private int chooseCourseIdByFilteredList() {
+        List<Course> filteredCourseList = getFilteredList();
+            listCourses(filteredCourseList);
+
+        int chosenId = -1;
+        boolean idFound = false;
+        if (!filteredCourseList.isEmpty()) {
+            while (!idFound) {
+                chosenId = commandLine.readInt("Type the Id of the Course.");
+                idFound = checkIfCourseIdExists(chosenId);
+                if (!idFound) System.err.println("Wrong id pls retry!");
+            }
+        }
+        return chosenId;
+    }
+
+    private boolean checkIfCourseIdExists(int chosenId) {
+        for (Course course : storage.getAllCourses()) {
+            if (course.getId() == chosenId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<Course> getFilteredList() {
+        String filter = commandLine.readString("Enter the filter. All courses which match this filter will be listed.");
+        List<Course> filteredList = new ArrayList<>();
+        for (Course course : storage.getAllCourses()) {
+            if (course.toString().contains(filter)) {
+                filteredList.add(course);
+            }
+        }
+        if (filteredList.isEmpty()) System.err.println("No Courses with this filter!");
+        return filteredList;
+    }
+
+    public void removeChosenCourseWithFilteredList() {
+        Course course = chooseCourseByFilteredList();
+        if(course != null){
+            storage.remove(course);
         }
     }
-
-    /**
-     * lists all courses and deletes the chosen one.
-     *
-     * @param integerList List of the containing Courses.
-     */
-    public void removeChosenCourseWithIntegerList(List<Integer> integerList) {
-        int courseId = choseCourseIdFromIntegerList(integerList);
-        if (courseId == -1) {
-            System.out.println("There are no courses!");
-        } else {
-            storage.remove(storage.searchCourse(courseId));
-        }
-    }
-
 }

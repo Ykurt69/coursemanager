@@ -27,7 +27,7 @@ public class ManageCourseMenu extends Menu {
                     break;
                 case COURSE_DELETE:
                     System.out.println(thisPath + "\\delete_course");
-                    courseManager.removeChosenCourseWithIntegerList(storage.convertCoursesToIds(storage.getAllCourses()));
+                    courseManager.removeChosenCourseWithFilteredList();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
                 case COURSE_CHOOSE:
