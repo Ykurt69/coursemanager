@@ -19,7 +19,7 @@ public class CourseManager extends Manager {
      * Instances a Course out of the console and adds it in to the Storage.
      */
     public void createCourse() {
-        int id = commandLine.readInt("ID: ", scanner);
+        int id = commandLine.readInt("ID: ");
         String title = commandLine.readString("title: ", scanner);
         String description = commandLine.readString("description: ", scanner);
         Lecturer lecturer = commandLine.findLecturer(scanner, storage);

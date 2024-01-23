@@ -2,6 +2,7 @@ package de.fuseki.coursemangement.exchange;
 
 import de.fuseki.coursemangement.pojos.Course;
 import de.fuseki.coursemangement.pojos.Lecturer;
+import de.fuseki.coursemangement.pojos.Person;
 import de.fuseki.coursemangement.pojos.Student;
 
 import java.util.ArrayList;

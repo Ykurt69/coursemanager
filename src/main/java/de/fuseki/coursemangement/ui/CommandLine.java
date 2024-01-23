@@ -20,10 +20,9 @@ public class CommandLine {
      * Prints a description of the inout and returns it.
      *
      * @param message the descriptions of the input.
-     * @param scanner to read the console.
      * @return the id in int.
      */
-    public int readInt(String message, Scanner scanner) {
+    public int readInt(String message) {
         String input;
         do {
             System.out.println(message);
@@ -96,7 +95,7 @@ public class CommandLine {
     public Lecturer findLecturer(Scanner sc, Storage storage) {
         Lecturer searched;
         do {
-            int input = readInt("ID of the Lecturer; ", sc);
+            int input = readInt("ID of the Lecturer: ");
             searched = storage.searchLecturer(input);
             if (searched == null) {
                 System.err.println("Cant find the Lecturer!");
