@@ -31,6 +31,7 @@ public class CommandLine {
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             }
+            System.out.println("_____________________________________________________________________________");
         } while (!input.matches("\\d+" ));
         return Integer.parseInt(input);
     }
@@ -53,6 +54,7 @@ public class CommandLine {
             if (!input.matches("\\d+") && !input.equals("-1")) {
                 System.err.println("Error: pls just use digits!");
             }
+            System.out.println("_____________________________________________________________________________");
         } while (!input.matches("\\d+") && !input.equals("-1"));
         return Integer.parseInt(input);
     }
@@ -81,6 +83,7 @@ public class CommandLine {
 
                 }
             }
+            System.out.println("_____________________________________________________________________________");
         } while (!input.matches("\\d+") || parsedInput < min || parsedInput > max);
         return parsedInput;
     }
@@ -101,6 +104,7 @@ public class CommandLine {
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             }
+            System.out.println("_____________________________________________________________________________");
         } while (!input.matches("\\d+"));
         return Integer.parseInt(input);
     }
@@ -121,6 +125,7 @@ public class CommandLine {
             if (searched == null) {
                 System.err.println("Cant find the Lecturer!");
             }
+            System.out.println("_____________________________________________________________________________");
         } while (searched == null);
         return searched;
     }
@@ -142,6 +147,7 @@ public class CommandLine {
             if (validDateCheck(strings)) {
                 rightInput = true;
             } else System.err.println("Wrong input pls retry!");
+            System.out.println("_____________________________________________________________________________");
         } while (!rightInput);
         return LocalDate.of(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
     }
@@ -163,6 +169,7 @@ public class CommandLine {
             if (validDateCheck(strings)) {
                 rightInput = true;
             } else System.err.println("Wrong input pls retry!");
+            System.out.println("_____________________________________________________________________________");
         } while (!rightInput);
         return LocalDate.of(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
     }
@@ -188,6 +195,7 @@ public class CommandLine {
         String houseNumber = readString("House Number: ");
         String city = readString("City: ");
         String postalCode = readString("postal code: ");
+        System.out.println("_____________________________________________________________________________");
         return new Address(street, houseNumber, city, postalCode);
     }
 
@@ -203,6 +211,7 @@ public class CommandLine {
         String houseNumber = readString("House Number: ");
         String city = readString("City: ");
         String postalCode = readString("postal code: ");
+        System.out.println("_____________________________________________________________________________");
         return new Address(street, houseNumber, city, postalCode);
     }
 
@@ -215,7 +224,9 @@ public class CommandLine {
      */
     public String readString(String description) {
         System.out.println(description);
-        return scanner.next();
+        String input = scanner.next();
+        System.out.println("_____________________________________________________________________________");
+        return input;
     }
 
     /**
@@ -227,7 +238,9 @@ public class CommandLine {
      */
     public String readString(String description, Scanner scanner, String oldValue) {
         System.out.println(oldValue + "\n" + description);
-        return scanner.next();
+        String input = scanner.next();
+        System.out.println("_____________________________________________________________________________");
+        return input;
     }
 
 }

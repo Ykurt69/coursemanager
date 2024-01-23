@@ -51,7 +51,7 @@ public class ManageCourseMenu extends Menu {
                 "1. Create Course\n" +
                 "2. Delete Course\n" +
                 "3. Update Course\n" +
-                "4. List all Courses\n " +
+                "4. List all Courses\n" +
                 "5. Go Back";
         int input = commandLine.readInt(options, 1, 5);
 

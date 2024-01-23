@@ -89,14 +89,10 @@ public class CourseManager extends Manager {
     }
 
 
-
-
-
-
     public Course chooseCourseByFilteredList() {
         int courseId = chooseCourseIdByFilteredList();
         Course choosenCourse = null;
-        if (courseId != -1){
+        if (courseId != -1) {
             choosenCourse = storage.searchCourse(courseId);
         }
         return choosenCourse;
@@ -104,15 +100,17 @@ public class CourseManager extends Manager {
 
     private int chooseCourseIdByFilteredList() {
         List<Course> filteredCourseList = getFilteredList();
-            listCourses(filteredCourseList);
+        listCourses(filteredCourseList);
 
-        int chosenId = -1;
+        int chosenId = 0;
         boolean idFound = false;
         if (!filteredCourseList.isEmpty()) {
-            while (!idFound) {
-                chosenId = commandLine.readInt("Type the Id of the Course.");
-                idFound = checkIfCourseIdExists(chosenId);
-                if (!idFound) System.err.println("Wrong id pls retry!");
+            while (!idFound && chosenId != -1) {
+                chosenId = commandLine.readInt("Type the Id of the Course.", "Abort");
+                if (chosenId != -1) {
+                    idFound = checkIfCourseIdExists(chosenId);
+                    if (!idFound) System.err.println("Wrong id pls retry!");
+                }
             }
         }
         return chosenId;
@@ -141,7 +139,7 @@ public class CourseManager extends Manager {
 
     public void removeChosenCourseWithFilteredList() {
         Course course = chooseCourseByFilteredList();
-        if(course != null){
+        if (course != null) {
             storage.remove(course);
         }
     }
