@@ -12,23 +12,24 @@ public class ManagePersonMenu extends Menu {
     private final MenuEnum MENU_ENUM;
     private final String thisPathName;
     private final String thisPath;
-    public ManagePersonMenu(Storage storage,String pathUntilHere, MenuEnum menuEnum) {
+
+    public ManagePersonMenu(Storage storage, String pathUntilHere, MenuEnum menuEnum) {
         super(storage, pathUntilHere);
         this.MENU_ENUM = menuEnum;
         thisPathName = "\\manage_" + getPersontypeInString();
         thisPath = getThisPath();
     }
+
     private String getThisPath() {
         return pathUntilHere + thisPathName;
     }
 
     private String getPersontypeInString() {
         String personType;
-        if (MENU_ENUM == MANAGE_STUDENTS){
+        if (MENU_ENUM == MANAGE_STUDENTS) {
             personType = "students";
-        }
-        else personType = "lecturer";
-        return  personType;
+        } else personType = "lecturer";
+        return personType;
     }
 
     public void menu() {
@@ -49,8 +50,12 @@ public class ManagePersonMenu extends Menu {
                     menuPersonEnum = MENU_PERSON;
                     break;
                 case CHOOSE:
-                    ConfigurePersonMenu configurePersonMenu = new ConfigurePersonMenu(storage,thisPath, MENU_ENUM, personManager);
+                    ConfigurePersonMenu configurePersonMenu = new ConfigurePersonMenu(storage, thisPath, MENU_ENUM, personManager);
                     configurePersonMenu.menu();
+                    menuPersonEnum = MENU_PERSON;
+                    break;
+                case LIST:
+                    personManager.listPersons(MENU_ENUM);
                     menuPersonEnum = MENU_PERSON;
                     break;
             }
@@ -61,23 +66,27 @@ public class ManagePersonMenu extends Menu {
         String options = "Choose one option and the the number.\n" +
                 "1. Create\n" +
                 "2. Delete\n" +
-                "3. Update " + getPersontypeInString() +"\n" +
-                "4. Go Back";
-        int input = commandLine.readInt(options, 1, 4);
+                "3. Update " + getPersontypeInString() + "\n" +
+                "4. List all" + getPersontypeInString() +"\n" +
+                "5. Go Back";
+        int input = commandLine.readInt(options, 1, 5);
 
         MenuPersonEnum chosen = MENU_PERSON;
         switch (input) {
             case 1:
-                chosen = MenuPersonEnum.CREATE;
+                chosen = CREATE;
                 break;
             case 2:
-                chosen = MenuPersonEnum.DELETE;
+                chosen = DELETE;
                 break;
             case 3:
-                chosen = MenuPersonEnum.CHOOSE;
+                chosen = CHOOSE;
                 break;
             case 4:
-                chosen = MenuPersonEnum.EXIT_MENU_PERSON;
+                chosen = LIST;
+                break;
+            case 5:
+                chosen = EXIT_MENU_PERSON;
         }
         return chosen;
     }

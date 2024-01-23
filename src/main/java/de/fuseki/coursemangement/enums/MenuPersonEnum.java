@@ -5,5 +5,6 @@ public enum MenuPersonEnum implements MenuMarker {
     CREATE,
     DELETE,
     CHOOSE,
+    LIST,
     EXIT_MENU_PERSON
 }

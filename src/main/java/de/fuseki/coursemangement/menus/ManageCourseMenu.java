@@ -30,6 +30,10 @@ public class ManageCourseMenu extends Menu {
                     courseManager.removeChosenCourseWithFilteredList();
                     menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
                     break;
+                case COURSE_LIST:
+                    courseManager.listCourses(storage.getAllCourses());
+                    menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
+                    break;
                 case COURSE_CHOOSE:
                     ConfigureCoursesMenu configureCoursesMenu = new ConfigureCoursesMenu(storage,thisPath , courseManager);
                     configureCoursesMenu.menu();
@@ -47,8 +51,9 @@ public class ManageCourseMenu extends Menu {
                 "1. Create Course\n" +
                 "2. Delete Course\n" +
                 "3. Update Course\n" +
-                "4. Go Back";
-        int input = commandLine.readInt(options, 1, 4);
+                "4. List all Courses\n " +
+                "5. Go Back";
+        int input = commandLine.readInt(options, 1, 5);
 
         MenuCourseEnum menuCourseEnum = MenuCourseEnum.MENU_COURSE_ENUM;
         switch (input) {
@@ -62,6 +67,9 @@ public class ManageCourseMenu extends Menu {
                 menuCourseEnum = MenuCourseEnum.COURSE_CHOOSE;
                 break;
             case 4:
+                menuCourseEnum = MenuCourseEnum.COURSE_LIST;
+                break;
+            case 5:
                 menuCourseEnum = MenuCourseEnum.EXIT_MENU_COURSE_ENUM;
         }
         return menuCourseEnum;
