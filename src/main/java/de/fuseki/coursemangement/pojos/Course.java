@@ -35,15 +35,13 @@ public class Course {
 
     @Override
     public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", lecturerId=" + lecturerId +
-                ", address=" + address +
-                ", dateBegin=" + dateBegin +
-                ", dateEnd=" + dateEnd +
-                '}';
+        return "id:" + id +
+                ", title: " + title + '\'' +
+                ", description: " + description + '\'' +
+                ", lecturerId: " + lecturerId +
+                ", address: " + address +
+                ", dateBegin: " + dateBegin +
+                ", dateEnd: " + dateEnd;
     }
 
     /**
