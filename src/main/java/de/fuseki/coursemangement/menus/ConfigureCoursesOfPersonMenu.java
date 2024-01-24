@@ -25,7 +25,7 @@ public class ConfigureCoursesOfPersonMenu extends Menu {
                     break;
                 case ADD_COURSE:
                     System.out.println(pathUntilHere + "\\add_course");
-                    COURSE_MANAGER.addChosenCourse(PERSON, storage.convertCoursesToIds(storage.getAllCourses()));
+                    COURSE_MANAGER.addChosenCourseToPerson(PERSON);
                     configureCoursesEnum = ConfigureCoursesEnum.COURSE_MAIN;
                     break;
                 case DELETE_COURSE:

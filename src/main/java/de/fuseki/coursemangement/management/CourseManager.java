@@ -130,4 +130,11 @@ public class CourseManager extends Manager {
             storage.remove(course);
         }
     }
+
+    public void addChosenCourseToPerson(Person person) {
+        Course choosenCourse = chooseCourseByFilteredList();
+        if (choosenCourse != null) {
+            person.addCourse(choosenCourse);
+        }
+    }
 }
