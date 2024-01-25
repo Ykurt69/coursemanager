@@ -237,4 +237,5 @@ public class CommandLine {
     }
     // TODO strings nehmen
     //TODO strich zwische auflistung und menu
-}
+    test
+}fsdfd
