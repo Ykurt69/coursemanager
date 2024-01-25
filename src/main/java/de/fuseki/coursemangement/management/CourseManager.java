@@ -22,10 +22,10 @@ public class CourseManager extends Manager {
         int id = commandLine.readInt("ID: ");
         String title = commandLine.readString("title: ");
         String description = commandLine.readString("description: ");
-        Lecturer lecturer = commandLine.findLecturer(scanner, storage);
-        Address address = commandLine.readAddress(scanner);
-        LocalDate dateBegin = commandLine.readDate("Begin date", scanner);
-        LocalDate dateEnd = commandLine.readDate("End date", scanner);
+        Lecturer lecturer = commandLine.findLecturer(storage);
+        Address address = commandLine.readAddress();
+        LocalDate dateBegin = commandLine.readDate("Begin date");
+        LocalDate dateEnd = commandLine.readDate("End date");
 
         storage.add(new Course(id, title, description, lecturer.getEmployeeId(), address, dateBegin, dateEnd));
     }
@@ -93,7 +93,7 @@ public class CourseManager extends Manager {
         boolean idFound = false;
         if (!filteredCourseList.isEmpty()) {
             while (!idFound && chosenId != -1) {
-                chosenId = commandLine.readInt("Type the Id of the Course.", "Abort");
+                chosenId = commandLine.readIntAbortable("Type the Id of the Course.", "Abort");
                 if (chosenId != -1) {
                     idFound = checkIfCourseIdExists(chosenId);
                     if (!idFound) System.err.println("Wrong id pls retry!");

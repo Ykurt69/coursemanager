@@ -37,32 +37,32 @@ public class ConfigureCoursesMenu extends Menu {
                         break;
                     case COURSE_CHANGE_TITLE:
                         System.out.println(thisPath + "\\change_title");
-                        choosenCourse.setTitle(commandLine.readString("Type the new title: ", scanner, "Old title: " + choosenCourse.getTitle()));
+                        choosenCourse.setTitle(commandLine.readString("Type the new title: ", "Old title: " + choosenCourse.getTitle()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DESCRIPTION:
                         System.out.println(thisPath + "\\change_description");
-                        choosenCourse.setDescription(commandLine.readString("Type the new description: ", scanner, "Old description: " + choosenCourse.getDescription()));
+                        choosenCourse.setDescription(commandLine.readString("Type the new description: ", "Old description: " + choosenCourse.getDescription()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_LECTURERID:
                         System.out.println(thisPath + "\\change_lecturerid");
-                        choosenCourse.setLecturerId(commandLine.readInt("Type new id: ", scanner, "Old id: " + choosenCourse.getLecturerId()));
+                        choosenCourse.setLecturerId(commandLine.readInt("Type new id: ", "Old id: " + choosenCourse.getLecturerId()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_ADDRESS:
                         System.out.println(thisPath + "\\change_address");
-                        choosenCourse.setAddress(commandLine.readAddress(scanner, "Old Address: " + choosenCourse.getAddress()));
+                        choosenCourse.setAddress(commandLine.readAddress("Old Address: " + choosenCourse.getAddress()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DATEBEGIN:
                         System.out.println(thisPath + "\\change_date_begin");
-                        choosenCourse.setDateBegin(commandLine.readDate("Type new begin date: ", scanner, "Old begin date: " + choosenCourse.getDateBegin()));
+                        choosenCourse.setDateBegin(commandLine.readDate("Type new begin date: ", "Old begin date: " + choosenCourse.getDateBegin()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                     case COURSE_CHANGE_DATEEND:
                         System.out.println(thisPath + "\\change_date_end");
-                        choosenCourse.setDateEnd(commandLine.readDate("Type new end date: ", scanner, "Old end date: " + choosenCourse.getDateEnd()));
+                        choosenCourse.setDateEnd(commandLine.readDate("Type new end date: ", "Old end date: " + choosenCourse.getDateEnd()));
                         courseChangeEnum = CourseChangeEnum.COURSE_CHANGE_ENUM;
                         break;
                 }

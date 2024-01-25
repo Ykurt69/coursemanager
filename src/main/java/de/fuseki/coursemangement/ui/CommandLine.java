@@ -27,7 +27,7 @@ public class CommandLine {
         do {
             System.out.println(message);
 
-            input = scanner.next();
+            input = scanner.nextLine();
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             }
@@ -42,12 +42,12 @@ public class CommandLine {
      * @param message the descriptions of the input.
      * @return the id in int.
      */
-    public int readInt(String message, String abortInput) {
+    public int readIntAbortable(String message, String abortInput) {
         String input;
         do {
             System.out.println(message + "\nto abort and go back type " + abortInput);
 
-            input = scanner.next();
+            input = scanner.nextLine();
             if (input.equalsIgnoreCase(abortInput)){
                 input = "-1";
             }
@@ -73,7 +73,7 @@ public class CommandLine {
         do {
             System.out.println(message);
 
-            input = scanner.next();
+            input = scanner.nextLine();
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             } else {
@@ -92,15 +92,14 @@ public class CommandLine {
      * Prints a description of the inout and returns it.
      *
      * @param message the descriptions of the input.
-     * @param scanner to read the console.
      * @return the id in int.
      */
-    public int readInt(String message, Scanner scanner, String oldValue) {
+    public int readInt(String message, String oldValue) {
         String input;
         do {
             System.out.println(oldValue + "\n" + message);
 
-            input = scanner.next();
+            input = scanner.nextLine();
             if (!input.matches("\\d+")) {
                 System.err.println("Error: pls just use digits!");
             }
@@ -113,11 +112,10 @@ public class CommandLine {
     /**
      * Gets Input and searches in the storage if there is a Lecturer with the same id.
      *
-     * @param sc      Scanner to read the console
      * @param storage in which the method is searching
      * @return the Lecturer found.
      */
-    public Lecturer findLecturer(Scanner sc, Storage storage) {
+    public Lecturer findLecturer(Storage storage) {
         Lecturer searched;
         do {
             int input = readInt("ID of the Lecturer: ");
@@ -134,16 +132,15 @@ public class CommandLine {
     /**
      * Asks for the Date in the console and parses it into a LocalDate.
      *
-     * @param scanner     to read the console.
      * @param description description of the Date.
      * @return the birthdate in LocalDate.
      */
-    public LocalDate readDate(String description, Scanner scanner, String oldValue) {
+    public LocalDate readDate(String description, String oldValue) {
         String[] strings;
         boolean rightInput = false;
         do {
             System.out.println(oldValue + "\n" + description + "([YYYY]-[MM]-[DD]: ");
-            strings = scanner.next().split("-");
+            strings = scanner.nextLine().split("-");
             if (validDateCheck(strings)) {
                 rightInput = true;
             } else System.err.println("Wrong input pls retry!");
@@ -155,17 +152,16 @@ public class CommandLine {
     /**
      * Asks for the Date in the console and parses it into a LocalDate.
      *
-     * @param scanner     to read the console.
      * @param description description of the Date.
      * @return the birthdate in LocalDate.
      */
-    public LocalDate readDate(String description, Scanner scanner) {
+    public LocalDate readDate(String description) {
         String[] strings;
 
         boolean rightInput = false;
         do {
             System.out.println(description + "([YYYY]-[MM]-[DD]: ");
-            strings = scanner.next().split("-");
+            strings = scanner.nextLine().split("-");
             if (validDateCheck(strings)) {
                 rightInput = true;
             } else System.err.println("Wrong input pls retry!");
@@ -187,31 +183,28 @@ public class CommandLine {
     /**
      * Makes an Address object out of console input.
      *
-     * @param scanner to read the console.
+     *
      * @return the Address in Address.
      */
-    public Address readAddress(Scanner scanner) {
-        String street = readString("Street: ");
-        String houseNumber = readString("House Number: ");
-        String city = readString("City: ");
-        String postalCode = readString("postal code: ");
-        System.out.println("_____________________________________________________________________________");
+    public Address readAddress() {
+        String street = readString("Street:");
+        String houseNumber = readString("House Number:");
+        String city = readString("City:");
+        String postalCode = readString("postal code:");
         return new Address(street, houseNumber, city, postalCode);
     }
 
     /**
      * Makes an Address object out of console input.
      *
-     * @param scanner to read the console.
      * @return the Address in Address.
      */
-    public Address readAddress(Scanner scanner, String oldAddress) {
+    public Address readAddress(String oldAddress) {
         System.out.println(oldAddress);
         String street = readString("Street: ");
         String houseNumber = readString("House Number: ");
         String city = readString("City: ");
         String postalCode = readString("postal code: ");
-        System.out.println("_____________________________________________________________________________");
         return new Address(street, houseNumber, city, postalCode);
     }
 
@@ -222,9 +215,10 @@ public class CommandLine {
      * @param description of the input wanted.
      * @return the input in String.
      */
+
     public String readString(String description) {
         System.out.println(description);
-        String input = scanner.next();
+        String input = scanner.nextLine();
         System.out.println("_____________________________________________________________________________");
         return input;
     }
@@ -233,14 +227,14 @@ public class CommandLine {
      * Asks in the console for an input and returns it without formatting or parsing it.
      *
      * @param description of the input wanted.
-     * @param scanner     to read out of console.
      * @return the input in String.
      */
-    public String readString(String description, Scanner scanner, String oldValue) {
+    public String readString(String description, String oldValue) {
         System.out.println(oldValue + "\n" + description);
-        String input = scanner.next();
+        String input = scanner.nextLine();
         System.out.println("_____________________________________________________________________________");
         return input;
     }
-
+    // TODO strings nehmen
+    //TODO strich zwische auflistung und menu
 }

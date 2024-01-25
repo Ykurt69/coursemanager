@@ -27,11 +27,11 @@ public class PersonManager extends Manager {
      */
     public void createPerson(MenuEnum personTypeOfMenu) {
         // Collect all Parameters
-        String name = commandLine.readString("name: ");
-        String surname = commandLine.readString("surname: ");
-        String emailAddress = commandLine.readString("email: ");
-        Address address = commandLine.readAddress(scanner);
-        LocalDate birthdate = commandLine.readDate("Birthdate", scanner);
+        String name = commandLine.readString("name:");
+        String surname = commandLine.readString("surname:");
+        String emailAddress = commandLine.readString("email:");
+        Address address = commandLine.readAddress();
+        LocalDate birthdate = commandLine.readDate("Birthdate");
 
         // Collect Subclass specific parameters and return an instance
         if (personTypeOfMenu == MANAGE_LECTURERS) {
@@ -124,9 +124,9 @@ public class PersonManager extends Manager {
         while (!personExists) {
             if (anyPerson) {
                 if (personTypeOfMenu == MANAGE_STUDENTS) {
-                    input = commandLine.readInt("Type in the Matriculation number of the Student.", "Abort");
+                    input = commandLine.readIntAbortable("Type in the Matriculation number of the Student.", "Abort");
                 } else {
-                    input = commandLine.readInt("Type in the ID of the Lecturer.", "Abort");
+                    input = commandLine.readIntAbortable("Type in the ID of the Lecturer.", "Abort");
                 }
             } else {
                 System.out.println("there are no Persons");

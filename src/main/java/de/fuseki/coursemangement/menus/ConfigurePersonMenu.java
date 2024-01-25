@@ -38,27 +38,27 @@ public class ConfigurePersonMenu extends Menu {
                     break;
                 case CHANGE_NAME:
                     System.out.println(pathOfPerson + "\\change_name");
-                    commandLine.readString("Type new name: ", scanner, "Old name: " + person.getName());
+                    commandLine.readString("Type new name: ", "Old name: " + person.getName());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_SURNAME:
                     System.out.println(pathOfPerson + "\\change_surname");
-                    commandLine.readString("Type new surname: ", scanner, "Old surname: " + person.getSurname());
+                    commandLine.readString("Type new surname: ", "Old surname: " + person.getSurname());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_EMAIL:
                     System.out.println(pathOfPerson + "\\change_email");
-                    commandLine.readString("Type new Email: ", scanner, "Old Email: " + person.getEmailAddress());
+                    commandLine.readString("Type new Email: ", "Old Email: " + person.getEmailAddress());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_ADDRESS:
                     System.out.println(pathOfPerson + "\\change_address");
-                    commandLine.readAddress(scanner, "Old address: " + person.getAddress().toString());
+                    commandLine.readAddress("Old address: " + person.getAddress().toString());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CHANGE_BIRTHDATE:
                     System.out.println(pathOfPerson + "\\change_birthdate");
-                    commandLine.readDate("Type new Date: ", scanner, "Old Date: " + person.getBirthdate().toString());
+                    commandLine.readDate("Type new Date: ", "Old Date: " + person.getBirthdate().toString());
                     personChangeEnum = PersonChangeEnum.PERSON_CHANGE_ENUM;
                     break;
                 case CONFIGURE_COURSES:
