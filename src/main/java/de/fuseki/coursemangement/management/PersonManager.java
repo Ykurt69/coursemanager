@@ -62,6 +62,7 @@ public class PersonManager extends Manager {
                 System.out.println(i + 1 + ". " + lecturerList.get(i));
             }
         }
+        System.out.println("_____________________________________________________________________________");
     }
 
     /**
@@ -77,12 +78,14 @@ public class PersonManager extends Manager {
             for (int i = 0; i < filteredstudentList.size(); i++) {
                 System.out.println(i + 1 + ". " + filteredstudentList.get(i));
             }
+            System.out.println("_____________________________________________________________________________");
             return true;
         } else if (personTypeOfMenu == MANAGE_LECTURERS) {
             List<Lecturer> lecturerList = filterLecturerList(filter);
             for (int i = 0; i < lecturerList.size(); i++) {
                 System.out.println(i + 1 + ". " + lecturerList.get(i));
             }
+            System.out.println("_____________________________________________________________________________");
             return true;
         } else return false;
     }

@@ -235,6 +235,4 @@ public class CommandLine {
         System.out.println("_____________________________________________________________________________");
         return input;
     }
-    // TODO strings nehmen
-    //TODO strich zwische auflistung und menu
 }
