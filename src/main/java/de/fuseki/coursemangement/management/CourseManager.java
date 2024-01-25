@@ -73,6 +73,7 @@ public class CourseManager extends Manager {
                 System.out.println((i + 1) + ". " + courses.get(i).toString());
             }
         }
+        System.out.println("_____________________________________________________________________________");
     }
 
 
